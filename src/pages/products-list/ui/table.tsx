@@ -24,17 +24,11 @@ export const ProductsListTable = ({
 	isFetching,
 }: ProductsListTableProps) => {
 	return (
-		<Grid
-			className="p-4"
-			gutter={4}
-			gutterXs="sm"
-			gutterMd="md"
-			gutterXl={20}
-		>
-			<LoadingOverlay visible={isFetching} overlayBlur={1} />
+		<Grid p="lg" gutter={4} gutterXs="sm" gutterMd="md" gutterXl={20}>
+			<LoadingOverlay visible={isFetching} overlayBlur={0.1} />
 			{products?.map(
 				({ id, title, price, images, category, brand, rating }) => (
-					<Grid.Col key={id} span={3}>
+					<Grid.Col key={id} lg={3} md={4} sm={6} span={12}>
 						<Card
 							radius="md"
 							shadow="sm"
@@ -74,17 +68,17 @@ export const ProductsListTable = ({
 									</Group>
 									<Group position="apart" mt="md" mb="md">
 										<Text weight={600}>${price}</Text>
-										<Badge color="blue" variant="light">
-											{brand}
-										</Badge>
 										<Badge color="pink" variant="light">
 											{category}
+										</Badge>
+										<Badge color="blue" variant="light">
+											{brand}
 										</Badge>
 									</Group>
 								</div>
 								<Button
-									variant="outline"
-									color="blue"
+									variant="filled"
+									className="bg-blue-500"
 									fullWidth
 									radius="md"
 								>

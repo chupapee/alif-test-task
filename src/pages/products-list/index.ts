@@ -1,2 +1,2 @@
 export { productsListApi } from './model';
-export { ProductsList } from './page';
+export { ProductsList } from './ui/page';

@@ -1,9 +1,9 @@
 import { ChevronIcon, Flex, Grid, Select, Slider, Text } from '@mantine/core';
 import { useMemo } from 'react';
-import { ProductsListTable } from 'widgets/products/list';
 
-import { useFilter } from './lib';
-import { useProductsListQuery } from './model';
+import { useFilter } from '../lib';
+import { useProductsListQuery } from '../model';
+import { ProductsListTable } from './table';
 
 export const ProductsList = () => {
 	const { data: products, isFetching, isError } = useProductsListQuery();
@@ -24,7 +24,11 @@ export const ProductsList = () => {
 
 	return (
 		<Grid>
-			<Grid.Col span={2} className="sticky left-0 h-full top-0">
+			<Grid.Col
+				xs={2}
+				span={12}
+				className="sm:sticky left-0 h-full top-0"
+			>
 				<Flex gap="sm" direction="column" wrap="wrap">
 					<Text>Filters</Text>
 					<Select
@@ -60,7 +64,7 @@ export const ProductsList = () => {
 					</label>
 				</Flex>
 			</Grid.Col>
-			<Grid.Col span={10}>
+			<Grid.Col xs={10} span={12}>
 				<ProductsListTable
 					products={productsToView}
 					isFetching={isFetching}
