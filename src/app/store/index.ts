@@ -1,10 +1,14 @@
+import { cartSlice } from '@pages/cart';
 import { configureStore } from '@reduxjs/toolkit';
 import { baseApi } from '@shared/api/baseApi';
 
+const rootReducer = {
+	[baseApi.reducerPath]: baseApi.reducer,
+	[cartSlice.name]: cartSlice.reducer,
+};
+
 export const store = configureStore({
-	reducer: {
-		[baseApi.reducerPath]: baseApi.reducer,
-	},
+	reducer: rootReducer,
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware().concat(baseApi.middleware),
 });

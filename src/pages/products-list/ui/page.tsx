@@ -27,7 +27,7 @@ export const ProductsList = () => {
 			<Grid.Col
 				xs={2}
 				span={12}
-				className="sm:sticky left-0 h-full top-0"
+				className="sm:sticky left-0 h-full top-20"
 			>
 				<Flex gap="sm" direction="column" wrap="wrap">
 					<Text>Filters</Text>

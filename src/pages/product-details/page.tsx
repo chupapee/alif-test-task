@@ -1,7 +1,6 @@
 import {
 	Badge,
 	Box,
-	Button,
 	Flex,
 	Grid,
 	Image,
@@ -10,6 +9,7 @@ import {
 	Stack,
 	Text,
 } from '@mantine/core';
+import { AddToCartButton } from '@pages/cart/add-to-cart';
 import { useParams } from 'react-router-dom';
 
 import { useProductDetailsQuery } from './model';
@@ -58,11 +58,10 @@ export const ProductDetails = () => {
 					</Badge>
 				</Flex>
 				<Text className="text-lg font-semibold">{description}</Text>
-				<Text className="text-2xl font-semibold">${price}</Text>
-				<Button variant="outline">Add to wishlist</Button>
-				<Button variant="filled" className="bg-blue-500">
-					Add to cart
-				</Button>
+				<Text className="text-2xl font-semibold">
+					{price && '$' + price}
+				</Text>
+				<AddToCartButton product={data!}>Add to cart</AddToCartButton>
 			</Stack>
 		</Flex>
 	);
