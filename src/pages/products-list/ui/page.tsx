@@ -38,7 +38,7 @@ export const ProductsList = () => {
 						styles={{ rightSection: { pointerEvents: 'none' } }}
 						data={categoriesList}
 						value={filterParams.category}
-						onChange={(val) => filter(products, 'category', val)}
+						onChange={(val) => filter('category', val)}
 					/>
 					<Select
 						placeholder="Brand"
@@ -47,7 +47,7 @@ export const ProductsList = () => {
 						styles={{ rightSection: { pointerEvents: 'none' } }}
 						data={brandsList}
 						value={filterParams.brand}
-						onChange={(val) => filter(products, 'brand', val!)}
+						onChange={(val) => filter('brand', val)}
 					/>
 					<label htmlFor="text">
 						<Text className="mb-1">Price</Text>
@@ -55,9 +55,7 @@ export const ProductsList = () => {
 							size="md"
 							radius="lg"
 							value={filterParams.price}
-							onChangeEnd={(val) =>
-								filter(products, 'price', val!)
-							}
+							onChangeEnd={(val) => filter('price', val)}
 							title="price"
 							max={5_000}
 						/>

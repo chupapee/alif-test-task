@@ -1,3 +1,4 @@
+import { notifications } from '@mantine/notifications';
 import { ProductDetailsDto } from '@pages/product-details';
 import { uniqueList } from '@shared/utils';
 import { useMemo, useState } from 'react';
@@ -18,55 +19,52 @@ export const useFilter = () => {
 	});
 
 	const filter = (
-		products: ProductDetailsDto[] = [],
 		key: keyof typeof filterParams,
 		val: string | number | null
 	) => {
-		if (key === 'category') {
-			const filteredList = products.filter(
-				(item) => item.category === val
-			);
-			setFilterParams({
-				...filterParams,
-				category: val as string,
-				brand: '',
-			});
-			setFilteredProducts(filteredList);
-			return;
-		}
-		if (key === 'brand') {
-			const filteredList = products.filter(
-				(item) =>
-					item.category === filterParams.category &&
-					item.brand === val
-			);
-			setFilterParams({
-				...filterParams,
-				brand: val as string,
-				category: filteredList[0]?.category ?? '',
-			});
-			setFilteredProducts(filteredList);
-			return;
-		}
+		if (products) {
+			const updatedParams = { ...filterParams, [key]: val };
 
-		const isNumber = typeof val === 'number';
-		const categorySelected = filterParams.category.length;
-		const brandSelected = filterParams.brand.length;
-		const filteredList = products.filter((item) => {
-			// FIXME: price not filtering while filterParams empty
-			if (isNumber && categorySelected && brandSelected) {
-				return (
-					item.category === filterParams.category &&
-					item.brand === filterParams.brand &&
-					item.price <= val
-				);
+			let filteredList = products;
+			Object.keys(updatedParams).forEach((param) => {
+				const filterParamVal =
+					updatedParams[param as keyof typeof updatedParams];
+
+				const isFilterParamExist =
+					typeof filterParamVal === 'string'
+						? filterParamVal.length > 0
+						: filterParamVal > 0;
+
+				if (isFilterParamExist) {
+					if (param === 'price') {
+						//** Price filter logic is different from other ones */
+						filteredList = filteredList
+							.filter(
+								(product) =>
+									product[param as keyof ProductDetailsDto] <=
+									filterParamVal
+							)
+							.sort((a, b) => b.price - a.price); // Sorting from larger to smaller for clarity
+					} else {
+						filteredList = filteredList.filter(
+							(product) =>
+								product[param as keyof ProductDetailsDto] ===
+								filterParamVal
+						);
+					}
+				}
+			});
+
+			if (filteredList.length === 0) {
+				notifications.show({
+					message: 'Your filter returned no results.',
+					color: 'red',
+				});
 			}
-		});
-		setFilterParams({
-			...filterParams,
-			price: val as number,
-		});
-		setFilteredProducts(filteredList);
+
+			setFilteredProducts(filteredList);
+			setFilterParams(updatedParams);
+		}
 	};
 
 	const brandsList = useMemo(() => {
