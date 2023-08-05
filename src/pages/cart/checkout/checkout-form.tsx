@@ -1,5 +1,6 @@
-import { Button, Flex, Stack, TextInput } from '@mantine/core';
 import { FormEventHandler, useState } from 'react';
+
+import { Button, Flex, Stack, TextInput } from '@mantine/core';
 
 import { PaymentSchema } from './types';
 

@@ -1,7 +1,8 @@
+import { useNavigate } from 'react-router-dom';
+
 import { Modal, ModalProps } from '@mantine/core';
 import { notifications } from '@mantine/notifications';
 import { useAppDispatch } from '@shared/config/redux-hooks';
-import { useNavigate } from 'react-router-dom';
 
 import { buyProducts } from '../model';
 import { CheckoutForm } from './checkout-form';
@@ -15,6 +16,7 @@ export const CheckoutModal = ({ ...attrs }: CheckoutModalProps) => {
 
 	const handlePaymentSubmit = (paymentData: PaymentSchema) => {
 		//** do something with payment data */
+		console.log(paymentData);
 		dispatch(buyProducts());
 		notifications.show({
 			title: 'Thank You!',

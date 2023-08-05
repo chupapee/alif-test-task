@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import {
 	Badge,
 	Card,
@@ -12,7 +14,6 @@ import {
 } from '@mantine/core';
 import { AddToCartButton } from '@pages/cart/add-to-cart';
 import { ProductDetailsDto } from '@pages/product-details';
-import { Link } from 'react-router-dom';
 
 interface ProductsListTableProps {
 	products?: ProductDetailsDto[];

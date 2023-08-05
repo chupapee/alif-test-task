@@ -1,3 +1,5 @@
+import { PropsWithChildren } from 'react';
+
 import {
 	Button,
 	ButtonProps,
@@ -10,7 +12,6 @@ import { useDisclosure } from '@mantine/hooks';
 import { notifications } from '@mantine/notifications';
 import { ProductDetailsDto } from '@pages/product-details';
 import { useAppDispatch } from '@shared/config/redux-hooks';
-import { PropsWithChildren } from 'react';
 
 import { removeCartProduct } from '../model';
 
@@ -37,7 +38,7 @@ export const RemoveCartProductButton = ({
 			<Button
 				{...attrs}
 				variant="white"
-				className="hover:-translate-y-1 transition-[transform_.1s_linear]"
+				className="sm:hover:-translate-y-1 transition-[transform_.1s_linear]"
 				onClick={open}
 			>
 				{children}
@@ -46,13 +47,21 @@ export const RemoveCartProductButton = ({
 				title={`Remove ${product.title} from cart`}
 				opened={confirmOpened}
 				onClose={close}
-				onSubmit={handleSubmit}
+				onConfirm={handleSubmit}
 			/>
 		</>
 	);
 };
 
-const ConfirmationModal = ({ onSubmit, onClose, ...attrs }: ModalProps) => {
+interface ConfirmationModalProps extends ModalProps {
+	onConfirm: () => void;
+}
+
+const ConfirmationModal = ({
+	onConfirm,
+	onClose,
+	...attrs
+}: ConfirmationModalProps) => {
 	return (
 		<Modal {...attrs} onClose={onClose} centered>
 			<Text className="text-lg p-2">
@@ -62,7 +71,7 @@ const ConfirmationModal = ({ onSubmit, onClose, ...attrs }: ModalProps) => {
 				<Button onClick={onClose} variant="white">
 					Cancel
 				</Button>
-				<Button color="red" onClick={onSubmit} className="bg-red-400">
+				<Button color="red" onClick={onConfirm} className="bg-red-400">
 					Confirm
 				</Button>
 			</Flex>

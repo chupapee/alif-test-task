@@ -1,3 +1,5 @@
+import { useParams } from 'react-router-dom';
+
 import {
 	Badge,
 	Box,
@@ -10,7 +12,6 @@ import {
 	Text,
 } from '@mantine/core';
 import { AddToCartButton } from '@pages/cart/add-to-cart';
-import { useParams } from 'react-router-dom';
 
 import { useProductDetailsQuery } from './model';
 
@@ -18,8 +19,9 @@ export const ProductDetails = () => {
 	const { id } = useParams();
 	const { data, isError, isFetching } = useProductDetailsQuery(id!);
 
-	if (!isFetching && !data) return <p>product not found!</p>;
-	if (isError) return <p>Ooops... something went wrong!</p>;
+	if (!isFetching && !data)
+		return <Text className="text-3xl">Product not found!</Text>;
+	if (isError) return <Text className="text-3xl">Cart is empty</Text>;
 
 	const { images, price, title, description, rating, category, brand } =
 		data ?? {};

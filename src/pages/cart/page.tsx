@@ -1,3 +1,6 @@
+import { useMemo } from 'react';
+import { Link } from 'react-router-dom';
+
 import {
 	Button,
 	Card,
@@ -11,8 +14,6 @@ import {
 import { useDisclosure } from '@mantine/hooks';
 import { ProductDetailsDto } from '@pages/product-details';
 import { useAppSelector } from '@shared/config/redux-hooks';
-import { useMemo } from 'react';
-import { Link } from 'react-router-dom';
 
 import { CheckoutModal } from './checkout/checkout-modal';
 import { selectCartProducts } from './model';

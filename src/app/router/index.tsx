@@ -1,9 +1,9 @@
+import { createBrowserRouter, Navigate } from 'react-router-dom';
+
+import { App } from '@app/appEntry';
 import { Cart } from '@pages/cart';
 import { ProductDetails } from '@pages/product-details';
 import { ProductsList } from '@pages/products-list';
-import { createBrowserRouter, Navigate } from 'react-router-dom';
-
-import { App } from '@app/index';
 
 export const router = createBrowserRouter([
 	{

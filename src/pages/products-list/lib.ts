@@ -1,7 +1,8 @@
+import { useMemo, useState } from 'react';
+
 import { notifications } from '@mantine/notifications';
 import { ProductDetailsDto } from '@pages/product-details';
 import { uniqueList } from '@shared/utils';
-import { useMemo, useState } from 'react';
 
 import { useProductsListQuery } from './model';
 

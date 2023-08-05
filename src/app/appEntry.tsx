@@ -1,8 +1,9 @@
+import { Link, Outlet } from 'react-router-dom';
+
 import { Flex, Image, Indicator, Title } from '@mantine/core';
 import { Notifications } from '@mantine/notifications';
 import { selectCartProducts } from '@pages/cart';
 import { useAppSelector } from '@shared/config/redux-hooks';
-import { Link, Outlet } from 'react-router-dom';
 
 export const App = () => {
 	return (
@@ -28,7 +29,7 @@ const Header = () => {
 			</Title>
 			<Link
 				to="/cart"
-				className="hover:-translate-y-2 transition-[transform_.1s_linear]"
+				className="sm:hover:-translate-y-2 transition-[transform_.1s_linear]"
 			>
 				<Indicator
 					disabled={cartProducts.length === 0}

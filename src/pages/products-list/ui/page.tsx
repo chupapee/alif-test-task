@@ -1,5 +1,6 @@
-import { ChevronIcon, Flex, Grid, Select, Slider, Text } from '@mantine/core';
 import { useMemo } from 'react';
+
+import { ChevronIcon, Flex, Grid, Select, Slider, Text } from '@mantine/core';
 
 import { useFilter } from '../lib';
 import { useProductsListQuery } from '../model';
@@ -19,8 +20,10 @@ export const ProductsList = () => {
 		return filteredProducts.length > 0 ? filteredProducts : products;
 	}, [filteredProducts, products]);
 
-	if (!isFetching && !products) return <p>Products not found</p>;
-	if (isError) return <p>Oops... something went wrong!</p>;
+	if (!isFetching && !products)
+		return <Text className="text-3xl">Products not found!</Text>;
+	if (isError)
+		return <Text className="text-3xl">Ooops... something went wrong!</Text>;
 
 	return (
 		<Grid>
