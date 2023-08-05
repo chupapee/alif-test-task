@@ -30,10 +30,18 @@ export const Cart = () => {
 	if (cartProducts.length === 0) return <EmptyCartFallback />;
 
 	return (
-		<Flex justify="center" gap={50}>
-			<CartProductsTable products={cartProducts} />
+		<Flex
+			justify="center"
+			gap={50}
+			className="max-w-[900px] w-full mx-auto md:flex-row flex-col"
+		>
+			<div className="md:w-3/5 w-full">
+				<CartProductsTable products={cartProducts} />
+			</div>
 
-			<CheckoutWidget totalPrice={totalPrice} />
+			<div className="flex-1">
+				<CheckoutWidget totalPrice={totalPrice} />
+			</div>
 		</Flex>
 	);
 };
@@ -60,9 +68,9 @@ const CartProductsTable = ({ products }: { products: ProductDetailsDto[] }) => {
 			<Title>Cart</Title>
 			{products.map((product) => (
 				<Flex key={product.id} gap={20} className="border-b-2 py-3">
-					<div className="w-[200px] h-[150px] overflow-hidden">
+					<div className="w-[200px] h-[150px] flex justify-center overflow-hidden">
 						<Image
-							className="max-w-full"
+							className="min-w-[100px] max-w-full object-cover"
 							src={product.images[0]}
 							alt={product.title}
 						/>
@@ -95,16 +103,11 @@ const CheckoutWidget = ({ totalPrice }: { totalPrice: string }) => {
 
 	return (
 		<>
-			<Card
-				shadow="sm"
-				padding="lg"
-				radius="md"
-				className="w-1/4 bg-gray-100"
-			>
+			<Card shadow="sm" padding="lg" radius="md" className="bg-gray-100">
 				<Stack spacing={1}>
 					<Text className="text-3xl font-semibold">Summary</Text>
 					<Flex justify="space-between" mt="lg">
-						<Text>Subtotal:</Text>
+						<Text>Total:</Text>
 						<Text weight={500}>
 							{totalPrice && '$' + totalPrice}
 						</Text>
@@ -133,9 +136,9 @@ const CheckoutWidget = ({ totalPrice }: { totalPrice: string }) => {
 				</Stack>
 			</Card>
 
-			{/* {checkoutOpened && (
+			{checkoutOpened && (
 				<CheckoutModal opened={checkoutOpened} onClose={close} />
-			)} */}
+			)}
 		</>
 	);
 };

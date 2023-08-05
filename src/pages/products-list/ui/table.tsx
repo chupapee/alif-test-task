@@ -75,9 +75,7 @@ export const ProductsListTable = ({
 									</Badge>
 								</Group>
 							</div>
-							<AddToCartButton product={product}>
-								Add to cart
-							</AddToCartButton>
+							<AddToCartButton product={product} />
 						</Flex>
 					</Card>
 				</Grid.Col>

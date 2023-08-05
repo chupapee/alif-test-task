@@ -1,19 +1,25 @@
 import { Button } from '@mantine/core';
 import { ProductDetailsDto } from '@pages/product-details';
 import { useAppDispatch, useAppSelector } from '@shared/config/redux-hooks';
-import { PropsWithChildren } from 'react';
 
-import { addCartProduct, selectCartProducts } from '../model';
+import {
+	addCartProduct,
+	selectCartProducts,
+	selectPayedProducts,
+} from '../model';
 
-interface AddToCartProps extends PropsWithChildren {
+interface AddToCartProps {
 	product?: ProductDetailsDto;
 }
 
-export const AddToCartButton = ({ product, children }: AddToCartProps) => {
+export const AddToCartButton = ({ product }: AddToCartProps) => {
 	const dispatch = useAppDispatch();
 
 	const isAddedToCart = Boolean(
 		useAppSelector(selectCartProducts).find(({ id }) => id === product?.id)
+	);
+	const isPurchased = Boolean(
+		useAppSelector(selectPayedProducts).find(({ id }) => id === product?.id)
 	);
 
 	if (!product) return null;
@@ -24,12 +30,12 @@ export const AddToCartButton = ({ product, children }: AddToCartProps) => {
 
 	return (
 		<Button
-			disabled={isAddedToCart}
+			disabled={isAddedToCart || isPurchased}
 			onClick={handleClick}
 			variant="filled"
-			className="bg-blue-500"
+			className="bg-blue-400"
 		>
-			{children}
+			{isPurchased ? 'Already yours' : 'Add to cart'}
 		</Button>
 	);
 };

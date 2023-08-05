@@ -61,7 +61,7 @@ export const ProductDetails = () => {
 				<Text className="text-2xl font-semibold">
 					{price && '$' + price}
 				</Text>
-				<AddToCartButton product={data!}>Add to cart</AddToCartButton>
+				<AddToCartButton product={data!} />
 			</Stack>
 		</Flex>
 	);
