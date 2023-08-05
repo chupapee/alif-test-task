@@ -1,4 +1,5 @@
 import { Flex, Image, Indicator, Title } from '@mantine/core';
+import { Notifications } from '@mantine/notifications';
 import { selectCartProducts } from '@pages/cart';
 import { useAppSelector } from '@shared/config/redux-hooks';
 import { Link, Outlet } from 'react-router-dom';
@@ -21,6 +22,7 @@ const Header = () => {
 			align="center"
 			className="sticky -top-1 bg-white z-10 py-4 mt-0"
 		>
+			<Notifications position="top-right" />
 			<Title className="text-xl md:text-2xl" weight={500}>
 				E-Commerce
 			</Title>
