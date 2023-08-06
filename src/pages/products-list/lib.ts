@@ -25,6 +25,7 @@ export const useFilter = () => {
 	) => {
 		if (products) {
 			const updatedParams = { ...filterParams, [key]: val };
+			if (key === 'category') updatedParams.brand = '';
 
 			let filteredList = products;
 			Object.keys(updatedParams).forEach((param) => {

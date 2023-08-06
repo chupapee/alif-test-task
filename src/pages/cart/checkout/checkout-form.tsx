@@ -1,6 +1,6 @@
-import { FormEventHandler, useState } from 'react';
-
 import { Button, Flex, Stack, TextInput } from '@mantine/core';
+import { useForm } from '@mantine/form';
+import { isExist, isNumber } from '@shared/utils';
 
 import { PaymentSchema } from './types';
 
@@ -9,39 +9,53 @@ interface CheckoutFormProps {
 }
 
 export const CheckoutForm = ({ onSubmit }: CheckoutFormProps) => {
-	const [user, setUser] = useState({ name: '', email: '' });
-	const [card, setCard] = useState({
-		cardNumber: '',
-		cvc: '',
-		expiryDate: '',
-	});
+	const paymentForm = useForm({
+		initialValues: {
+			name: '',
+			email: '',
+			cardNumber: '',
+			cvc: '',
+			expireDate: '',
+		},
 
-	const handleSubmit: FormEventHandler = (e) => {
-		e.preventDefault();
-		onSubmit({ ...user, cardData: { ...card } });
-	};
+		validate: {
+			name: (val) => (val.length > 1 ? null : 'too short name'),
+			email: (val) =>
+				isExist(val) && val.includes('@') && val.includes('.')
+					? null
+					: 'invalid email',
+			cardNumber: (val) =>
+				!isNumber(val)
+					? 'type only number please'
+					: // eslint-disable-next-line unicorn/no-nested-ternary
+					val.length < 12
+					? 'at least 12 numbers required'
+					: null,
+			cvc: (val) => (isNumber(val) ? null : 'type only number please'),
+			expireDate: (val) =>
+				isNumber(val) ? null : 'type only number please',
+		},
+	});
 
 	return (
 		<Stack spacing="sm">
-			<form onSubmit={handleSubmit} className="flex flex-col gap-2">
+			<form
+				onSubmit={paymentForm.onSubmit((vals) => onSubmit(vals))}
+				className="flex flex-col gap-2"
+			>
 				<TextInput
 					minLength={2}
 					placeholder="Your name"
+					type="text"
 					label="Name"
 					required
-					value={user.name}
-					onChange={(e) =>
-						setUser((prev) => ({ ...prev, name: e.target.value }))
-					}
+					{...paymentForm.getInputProps('name')}
 				/>
 				<TextInput
 					placeholder="Your email"
 					label="Email"
 					required
-					value={user.email}
-					onChange={(e) =>
-						setUser((prev) => ({ ...prev, email: e.target.value }))
-					}
+					{...paymentForm.getInputProps('email')}
 				/>
 				<TextInput
 					placeholder="1234 4567 ****"
@@ -50,13 +64,7 @@ export const CheckoutForm = ({ onSubmit }: CheckoutFormProps) => {
 					maxLength={12}
 					minLength={12}
 					className="mb-1"
-					value={card.cardNumber}
-					onChange={(e) =>
-						setCard((prev) => ({
-							...prev,
-							cardNumber: e.target.value,
-						}))
-					}
+					{...paymentForm.getInputProps('cardNumber')}
 				/>
 				<Flex
 					gap={4}
@@ -68,26 +76,14 @@ export const CheckoutForm = ({ onSubmit }: CheckoutFormProps) => {
 						minLength={4}
 						placeholder="MM/YY"
 						required
-						value={card.expiryDate}
-						onChange={(e) =>
-							setCard((prev) => ({
-								...prev,
-								expiryDate: e.target.value,
-							}))
-						}
+						{...paymentForm.getInputProps('expireDate')}
 					/>
 					<TextInput
 						maxLength={3}
 						minLength={3}
 						placeholder="CVC"
 						required
-						value={card.cvc}
-						onChange={(e) =>
-							setCard((prev) => ({
-								...prev,
-								cvc: e.target.value,
-							}))
-						}
+						{...paymentForm.getInputProps('cvc')}
 					/>
 				</Flex>
 				<Button type="submit" variant="filled" className="bg-blue-500">

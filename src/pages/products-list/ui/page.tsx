@@ -53,14 +53,15 @@ export const ProductsList = () => {
 						onChange={(val) => filter('brand', val)}
 					/>
 					<label htmlFor="text">
-						<Text className="mb-1">Price</Text>
+						<Text className="mb-1 text-center">Price</Text>
 						<Slider
 							size="md"
 							radius="lg"
+							title="price"
+							labelAlwaysOn
+							max={5_000}
 							value={filterParams.price}
 							onChangeEnd={(val) => filter('price', val)}
-							title="price"
-							max={5_000}
 						/>
 					</label>
 				</Flex>
