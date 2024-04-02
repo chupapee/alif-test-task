@@ -6,20 +6,20 @@
 Должна быть возможность фильтрации товаров по цене, бренду и категории ✅  
 Также должна быть страница с подробным описанием товара ✅  
 
-### 🎥 Ссылка на демо: [alif-test-task-comeall09.vercel.app](https://alif-test-task-comeall09.vercel.app/)
+### 🎥 Ссылка на демо: [https://alif-test-task-chupapee.vercel.app](https://alif-test-task-chupapee.vercel.app/)
 
 ## 📷 Скриншоты
 
 <table align='center'>
 	<tr>
-		<td><img alt="products list page" src="https://github.com/comeall09/readme-storage/blob/main/images/alif/products-list.png"></td>
-		<td><img alt="product details page" src="https://github.com/comeall09/readme-storage/blob/main/images/alif/product-details.png"></td>
-		<td><img alt="cart page" src="https://github.com/comeall09/readme-storage/blob/main/images/alif/cart.png"></td>
+		<td><img alt="products list page" src="assets/products-list.png"></td>
+		<td><img alt="product details page" src="assets/product-details.png"></td>
+		<td><img alt="cart page" src="assets/cart.png"></td>
 	</tr>
 	<tr>
-		<td><img alt="mobile products list page" src="https://github.com/comeall09/readme-storage/blob/main/images/alif/mobile-products-list.png"></td>
-		<td><img alt="mobile product details page" src="https://github.com/comeall09/readme-storage/blob/main/images/alif/mobile-product-details.png"></td>
-		<td><img alt="mobile cart page" src="https://github.com/comeall09/readme-storage/blob/main/images/alif/mobile-cart.png"></td>
+		<td><img alt="mobile products list page" src="assets/mobile-products-list.png"></td>
+		<td><img alt="mobile product details page" src="assets/mobile-product-details.png"></td>
+		<td><img alt="mobile cart page" src="assets/mobile-cart.png"></td>
 </tr>
 </table>
 
@@ -39,7 +39,7 @@
 ## 🛠️ Инструкция по запуску проекта:
 ### Склонируйте репозиторий:
 ```shell
-git clone https://github.com/comeall09/alif-test-task.git <название папки>
+git clone https://github.com/chupapee/alif-test-task.git <название папки>
 ```
 ### Установите зависимости:
 ```shell
